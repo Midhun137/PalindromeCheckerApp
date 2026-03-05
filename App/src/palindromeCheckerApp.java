@@ -1,95 +1,51 @@
-class PalindromeLinkedList {
-    class PalindromeRecursion {
+class PalindromeRecursion {
+    class PalindromeIgnoreCase {
 
-        // Node class
-        static class Node {
-            char data;
-            Node next;
-            // Recursive function
-            static boolean isPalindrome(String str, int start, int end) {
+        // Recursive function
+        static boolean isPalindrome(String str, int start, int end) {
+            public static void main(String[] args) {
 
-                Node(char data) {
-                    this.data = data;
-                    this.next = null;
-                    // Base condition
-                    if (start >= end) {
-                        return true;
+                // Base condition
+                if (start >= end) {
+                    return true;
+                }
+                String text = "A man a plan a canal Panama";
+
+                // If characters are not equal
+                if (str.charAt(start) != str.charAt(end)) {
+                    return false;
+                }
+                // Normalize string (remove spaces and convert to lowercase)
+                text = text.replaceAll("\\s+", "").toLowerCase();
+
+                // Recursive call
+                return isPalindrome(str, start + 1, end - 1);
+            }
+            int start = 0;
+            int end = text.length() - 1;
+
+            public static void main(String[] args) {
+                boolean isPalindrome = true;
+
+                String word = "madam";
+                // Compare characters
+                while (start < end) {
+                    if (text.charAt(start) != text.charAt(end)) {
+                        isPalindrome = false;
+                        break;
                     }
+                    start++;
+                    end--;
                 }
 
-                // Reverse linked list
-                static Node reverse(Node head) {
-                    Node prev = null;
-                    Node current = head;
-
-                    while (current != null) {
-                        Node next = current.next;
-                        current.next = prev;
-                        prev = current;
-                        current = next;
-                        // If characters are not equal
-                        if (str.charAt(start) != str.charAt(end)) {
-                            return false;
-                        }
-
-                        return prev;
+                if (isPalindrome(word, 0, word.length() - 1)) {
+                    System.out.println(word + " is a Palindrome");
+                    // Display result
+                    if (isPalindrome) {
+                        System.out.println("It is a Palindrome");
+                    } else {
+                        System.out.println(word + " is NOT a Palindrome");
+                        System.out.println("It is NOT a Palindrome");
                     }
-
-                    // Check palindrome
-                    static boolean isPalindrome(Node head) {
-
-                        Node slow = head;
-                        Node fast = head;
-
-                        // Find middle using fast and slow pointer
-                        while (fast != null && fast.next != null) {
-                            slow = slow.next;
-                            fast = fast.next.next;
-                        }
-
-                        // Reverse second half
-                        Node secondHalf = reverse(slow);
-                        Node firstHalf = head;
-
-                        // Compare halves
-                        while (secondHalf != null) {
-                            if (firstHalf.data != secondHalf.data) {
-                                return false;
-                            }
-                            firstHalf = firstHalf.next;
-                            secondHalf = secondHalf.next;
-                        }
-
-                        return true;
-                        // Recursive call
-                        return isPalindrome(str, start + 1, end - 1);
-                    }
-
-                    public static void main(String[] args) {
-
-                        String word = "madam";
-
-                        Node head = null;
-                        Node tail = null;
-
-                        // Convert string to linked list
-                        for (int i = 0; i < word.length(); i++) {
-                            Node newNode = new Node(word.charAt(i));
-
-                            if (head == null) {
-                                head = newNode;
-                                tail = newNode;
-                            } else {
-                                tail.next = newNode;
-                                tail = newNode;
-                            }
-                        }
-
-                        // Print result
-                        if (isPalindrome(head)) {
-                            if (isPalindrome(word, 0, word.length() - 1)) {
-                                System.out.println(word + " is a Palindrome");
-                            } else {
-                                System.out.println(word + " is NOT a Palindrome");
-                            }
-                        }
+                }
+            }
