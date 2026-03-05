@@ -1,39 +1,36 @@
 // Palindrome Checker Application
-// Use Case 1: Application Entry & Welcome Message
 // Use Case 2: Print a Hardcoded Palindrome Result
+// Use Case 3: Palindrome Check Using String Reverse
 
 class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // Display Welcome Message
-        System.out.println("====================================");
-        System.out.println("     Welcome to Palindrome Checker");
-        System.out.println("====================================");
         // Hardcoded string
         String word = "madam";
+        // Original String
+        String word = "level";
 
-        // Display Application Details
-        System.out.println("Application Name : Palindrome Checker App");
-        System.out.println("Version          : 1.0");
-        // Message for next step// Palindrome Checker Application
-        //// Use Case 1: Application Entry & Welcome Message
-        //// Use Case 2: Print a Hardcoded Palindrome Result
-
-        System.out.println("\nThe program will continue to palindrome validation...");
         // Reverse the string
         String reverse = "";
+        // Variable to store reversed string
+        String reversed = "";
 
         for(int i = word.length() - 1; i >= 0; i--) {
             reverse = reverse + word.charAt(i);
-        }
+            // Reverse the string using for loop
+            for (int i = word.length() - 1; i >= 0; i--) {
+                reversed = reversed + word.charAt(i);
+            }
 
-        // Check if palindrome
-        if(word.equals(reverse)) {
-            System.out.println("The word \"" + word + "\" is a Palindrome.");
-        }
-        else {
-            System.out.println("The word \"" + word + "\" is NOT a Palindrome.");
-        }
-    }
-}
+            // Check if palindrome
+            if(word.equals(reverse)) {
+                // Compare original and reversed string
+                if (word.equals(reversed)) {
+                    System.out.println("The word \"" + word + "\" is a Palindrome.");
+                }
+                else {
+                } else {
+                    System.out.println("The word \"" + word + "\" is NOT a Palindrome.");
+                }
+            }
