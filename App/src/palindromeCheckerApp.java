@@ -1,59 +1,56 @@
-import java.util.Deque;
-import java.util.LinkedList;
 class PalindromeLinkedList {
+    class PalindromeRecursion {
 
-    class PalindromeDeque {
         // Node class
         static class Node {
             char data;
             Node next;
+            // Recursive function
+            static boolean isPalindrome(String str, int start, int end) {
 
-            public static void main(String[] args) {
                 Node(char data) {
                     this.data = data;
                     this.next = null;
-                }
-            }
-
-            String word = "racecar";
-            // Reverse linked list
-            static Node reverse(Node head) {
-                Node prev = null;
-                Node current = head;
-
-                Deque<Character> deque = new LinkedList<>();
-                while (current != null) {
-                    Node next = current.next;
-                    current.next = prev;
-                    prev = current;
-                    current = next;
+                    // Base condition
+                    if (start >= end) {
+                        return true;
+                    }
                 }
 
-                // Insert characters into deque
-                for (int i = 0; i < word.length(); i++) {
-                    deque.addLast(word.charAt(i));
-                    return prev;
-                }
+                // Reverse linked list
+                static Node reverse(Node head) {
+                    Node prev = null;
+                    Node current = head;
 
-                // Check palindrome
-                static boolean isPalindrome(Node head) {
+                    while (current != null) {
+                        Node next = current.next;
+                        current.next = prev;
+                        prev = current;
+                        current = next;
+                        // If characters are not equal
+                        if (str.charAt(start) != str.charAt(end)) {
+                            return false;
+                        }
 
-                    Node slow = head;
-                    Node fast = head;
-
-                    // Find middle using fast and slow pointer
-                    while (fast != null && fast.next != null) {
-                        slow = slow.next;
-                        fast = fast.next.next;
+                        return prev;
                     }
 
-                    boolean isPalindrome = true;
-                    // Reverse second half
-                    Node secondHalf = reverse(slow);
-                    Node firstHalf = head;
+                    // Check palindrome
+                    static boolean isPalindrome(Node head) {
 
-                    // Compare first and last characters
-                    while (deque.size() > 1) {
+                        Node slow = head;
+                        Node fast = head;
+
+                        // Find middle using fast and slow pointer
+                        while (fast != null && fast.next != null) {
+                            slow = slow.next;
+                            fast = fast.next.next;
+                        }
+
+                        // Reverse second half
+                        Node secondHalf = reverse(slow);
+                        Node firstHalf = head;
+
                         // Compare halves
                         while (secondHalf != null) {
                             if (firstHalf.data != secondHalf.data) {
@@ -63,9 +60,9 @@ class PalindromeLinkedList {
                             secondHalf = secondHalf.next;
                         }
 
-                        char first = deque.removeFirst();
-                        char last = deque.removeLast();
                         return true;
+                        // Recursive call
+                        return isPalindrome(str, start + 1, end - 1);
                     }
 
                     public static void main(String[] args) {
@@ -79,24 +76,20 @@ class PalindromeLinkedList {
                         for (int i = 0; i < word.length(); i++) {
                             Node newNode = new Node(word.charAt(i));
 
-                            if (first != last) {
-                                isPalindrome = false;
-                                break;
-                                if (head == null) {
-                                    head = newNode;
-                                    tail = newNode;
-                                } else {
-                                    tail.next = newNode;
-                                    tail = newNode;
-                                }
+                            if (head == null) {
+                                head = newNode;
+                                tail = newNode;
+                            } else {
+                                tail.next = newNode;
+                                tail = newNode;
                             }
+                        }
 
-                            // Display result
-                            if (isPalindrome) {
-                                // Print result
-                                if (isPalindrome(head)) {
-                                    System.out.println(word + " is a Palindrome");
-                                } else {
-                                    System.out.println(word + " is NOT a Palindrome");
-                                }
+                        // Print result
+                        if (isPalindrome(head)) {
+                            if (isPalindrome(word, 0, word.length() - 1)) {
+                                System.out.println(word + " is a Palindrome");
+                            } else {
+                                System.out.println(word + " is NOT a Palindrome");
                             }
+                        }
